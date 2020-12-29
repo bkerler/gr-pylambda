@@ -1,0 +1,51 @@
+id: pylambda_stream_lambda
+label: Stream Lambda
+category: '[Lambda]'
+
+templates:
+  imports: import pylambda, numpy as np
+  make: pylambda.stream_lambda(${fn}, [${intype.np},]*${inports}, [${intype.np},]*${outports})
+  callbacks:
+  - set_fn(${fn})
+
+parameters:
+- id: intype
+  label: Type
+  dtype: enum
+  options: [complex, float, int, short, byte]
+  option_attributes:
+      np: [np.complex64, np.float32, np.int32, np.int16, np.char]
+  hide: part
+- id: inports
+  label: Input Ports
+  dtype: int
+  default: '1'
+  hide: ${ 'part' if inports == 1 else 'none' }
+- id: outtype
+  label: Type
+  dtype: enum
+  options: [complex, float, int, short, byte]
+  option_attributes:
+      np: [np.complex64, np.float32, np.int32, np.int16, np.char]
+  hide: part
+- id: outports
+  label: Output Ports
+  dtype: int
+  default: '1'
+  hide: ${ 'part' if outports == 1 else 'none' }
+- id: fn
+  label: Function
+  dtype: raw
+  default: 'lambda input_items, output_index: (input_items[output_index][::2]**2)*0.1'
+
+inputs:
+- domain: stream
+  dtype: ${ intype }
+  multiplicity: ${ inports }
+
+outputs:
+- domain: stream
+  dtype: ${ intype }
+  multiplicity: ${ outports }
+
+file_format: 1

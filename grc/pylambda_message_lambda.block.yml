@@ -1,0 +1,27 @@
+id: pylambda_message_lambda
+label: Message Lambda
+category: '[Lambda]'
+
+templates:
+  imports: import pylambda, pmt, numpy as np
+  make: pylambda.message_lambda(${fn})
+  callbacks:
+  - set_fn(${fn})
+
+parameters:
+- id: fn
+  label: Function
+  dtype: raw
+  default: 'lambda msg: pmt.cons(pmt.make_dict(), msg)'
+
+inputs:
+- id: msg
+  domain: message
+  optional: true
+
+outputs:
+- id: msg
+  domain: message
+  optional: true
+
+file_format: 1

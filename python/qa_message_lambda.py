@@ -7,7 +7,6 @@
 #
 
 from gnuradio import gr, gr_unittest
-from gnuradio import blocks
 from message_lambda import message_lambda
 
 class qa_message_lambda(gr_unittest.TestCase):
@@ -18,7 +17,11 @@ class qa_message_lambda(gr_unittest.TestCase):
     def tearDown(self):
         self.tb = None
 
-    def test_001_t(self):
+    def test_instance(self):
+        # FIXME: Test will fail until you pass sensible arguments to the constructor
+        instance = message_lambda(lambda msg: pmt.cons(pmt.PMT_NIL, msg))
+
+    def test_001_descriptive_test_name(self):
         # set up fg
         self.tb.run()
         # check data

@@ -50,6 +50,10 @@ Thumbs.db
 build
 build/*
 
+# GRC generated python files
+############################
+examples/*.py
+
 # unit test files #
 ###################
 .unittests
